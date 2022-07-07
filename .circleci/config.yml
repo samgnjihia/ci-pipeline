@@ -46,9 +46,11 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - build
       - print-hello
       - print-world:
           requires:
             - print-hello
+  test-env-vars:
+    jobs:
+      - build
 
