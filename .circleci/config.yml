@@ -30,12 +30,23 @@ jobs:
       - run:
           name: "Say World"
           command: "echo  World!"
+  # echo the added env var
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $MY_ENV_VAR
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
+      - build
       - print-hello
       - print-world:
           requires:
